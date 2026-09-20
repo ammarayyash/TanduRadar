@@ -1,0 +1,471 @@
+:root {
+    --primary: #16a34a;
+    --primary-hover: #15803d;
+    --bg-dark: #0f172a;
+    --bg-card: #1e293b;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border: #334155;
+    /* Status warna TanamBijak */
+    --status-merah:  #ef4444;
+    --status-kuning: #f59e0b;
+    --status-hijau:  #22c55e;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header & Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(15, 23, 42, 0.9);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+    text-decoration: none;
+}
+
+.logo span {
+    color: var(--primary);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--text-main);
+}
+
+/* Sections */
+.section {
+    padding: 90px 0 60px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-header h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.section-header p {
+    color: var(--text-muted);
+}
+
+/* Hero */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding-top: 70px;
+}
+
+.hero .tag {
+    background-color: rgba(79, 70, 229, 0.15);
+    color: var(--primary);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin: 20px 0;
+}
+
+.hero h1 span {
+    color: var(--primary);
+}
+
+.hero p {
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 30px;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    margin-left: 10px;
+}
+
+.btn-secondary:hover {
+    border-color: var(--primary);
+}
+
+/* Grid & Cards */
+.grid {
+    display: grid;
+    gap: 25px;
+}
+
+.grid-team {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.grid-projects {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+}
+
+/* Team Card */
+.card-member {
+    text-align: center;
+}
+
+.card-member .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    object-fit: cover;
+    border: 3px solid var(--primary);
+}
+
+.card-member .role {
+    color: var(--primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.card-member .bio {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    margin: 12px 0;
+}
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 15px;
+}
+
+.badge {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+.socials a {
+    color: var(--text-muted);
+    margin: 0 8px;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+.socials a:hover {
+    color: var(--primary);
+}
+
+/* Project Card */
+.card-project {
+    padding: 0;
+    overflow: hidden;
+}
+
+.project-img-wrapper img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.project-body {
+    padding: 20px;
+}
+
+.project-body .category {
+    font-size: 0.8rem;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.project-body h3 {
+    margin: 6px 0;
+}
+
+.project-body p {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    margin-bottom: 15px;
+}
+
+.project-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Contact Form */
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-main);
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.btn-block {
+    width: 100%;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 30px 0;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2.2rem; }
+    .nav-links { display: none; }
+}
+
+/* ═══════════════════════════════════════
+   TanamBijak — Status Indicators
+═══════════════════════════════════════ */
+.status-merah  { color: var(--status-merah);  }
+.status-kuning { color: var(--status-kuning); }
+.status-hijau  { color: var(--status-hijau);  }
+
+.badge-merah  { background-color: rgba(239,68,68,.15);   border-color: var(--status-merah);  color: var(--status-merah);  }
+.badge-kuning { background-color: rgba(245,158,11,.15);  border-color: var(--status-kuning); color: var(--status-kuning); }
+.badge-hijau  { background-color: rgba(34,197,94,.15);   border-color: var(--status-hijau);  color: var(--status-hijau);  }
+
+/* Progress bar */
+.progress-bar-wrap {
+    background: rgba(255,255,255,.07);
+    border-radius: 99px;
+    height: 10px;
+    overflow: hidden;
+    margin: 8px 0;
+}
+.progress-bar-fill {
+    height: 100%;
+    border-radius: 99px;
+    transition: width .6s ease;
+}
+.fill-merah  { background: var(--status-merah); }
+.fill-kuning { background: var(--status-kuning); }
+.fill-hijau  { background: var(--status-hijau); }
+
+/* Komoditas row */
+.komoditas-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    font-size: .9rem;
+    font-weight: 600;
+}
+
+/* Stats summary bar */
+.stats-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    margin-bottom: 40px;
+}
+.stats-bar .stat-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    text-align: center;
+}
+.stat-item .stat-number {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary);
+    display: block;
+}
+.stat-item .stat-label {
+    font-size: .8rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+/* Alternatif card */
+.card-alternatif {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+.card-alternatif .alt-icon {
+    font-size: 2.2rem;
+    line-height: 1;
+}
+.card-alternatif .alt-body h4 { margin-bottom: 4px; }
+.card-alternatif .alt-body p  { font-size: .85rem; color: var(--text-muted); margin: 0; }
+
+/* Jadwal panen table */
+.jadwal-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .9rem;
+}
+.jadwal-table th {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-muted);
+    font-weight: 600;
+}
+.jadwal-table td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(51,65,85,.5);
+}
+.jadwal-table tr:last-child td { border-bottom: none; }
+
+/* Filter bar */
+.filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+.filter-bar select,
+.filter-bar input {
+    padding: 9px 14px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: .9rem;
+}
+.filter-bar select:focus,
+.filter-bar input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+/* Success flash */
+.flash-success {
+    background: rgba(34,197,94,.15);
+    border: 1px solid var(--status-hijau);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    color: var(--status-hijau);
+    font-weight: 600;
+}
+
+/* TanamBijak hero tag overwrite untuk green */
+.tag-green {
+    background-color: rgba(22, 163, 74, 0.15);
+    color: var(--primary);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: .85rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 12px;
+}
