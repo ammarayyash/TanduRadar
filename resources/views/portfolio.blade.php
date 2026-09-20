@@ -34,27 +34,27 @@
             <p>Platform manajemen rotasi tanam berbasis komunitas untuk mencegah oversupply komoditas pertanian</p>
         </div>
         <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap:20px; margin-bottom:30px;">
-            <a href="{{ route('mata-desa') }}" class="card" style="text-decoration:none; display:block; text-align:center;">
+            <a href="{{ route('mata-desa') }}" class="card" style="text-align:center;">
                 <div style="font-size:2.5rem; margin-bottom:10px;">📊</div>
-                <h3 style="color:var(--primary)">Mata Desa</h3>
+                <h3>Mata Desa</h3>
                 <p class="bio">Visualisasi distribusi komoditas real-time per kecamatan dengan indikator Merah/Kuning/Hijau.</p>
                 <span class="project-link">Buka Modul <i class="fas fa-arrow-right"></i></span>
             </a>
-            <a href="{{ route('rekomendasi') }}" class="card" style="text-decoration:none; display:block; text-align:center;">
+            <a href="{{ route('rekomendasi') }}" class="card" style="text-align:center;">
                 <div style="font-size:2.5rem; margin-bottom:10px;">💡</div>
-                <h3 style="color:var(--primary)">Rekomendasi Cerdas</h3>
+                <h3>Rekomendasi Cerdas</h3>
                 <p class="bio">Saran komoditas alternatif saat lahan jenuh, lengkap dengan kalkulator estimasi keuntungan.</p>
                 <span class="project-link">Buka Modul <i class="fas fa-arrow-right"></i></span>
             </a>
-            <a href="{{ route('logistik') }}" class="card" style="text-decoration:none; display:block; text-align:center;">
+            <a href="{{ route('logistik') }}" class="card" style="text-align:center;">
                 <div style="font-size:2.5rem; margin-bottom:10px;">🚛</div>
-                <h3 style="color:var(--primary)">Eco-Logistik</h3>
+                <h3>Eco-Logistik</h3>
                 <p class="bio">Jadwal panen desa & koordinasi armada truk. Tracker sayur terselamatkan dari food waste.</p>
                 <span class="project-link">Buka Modul <i class="fas fa-arrow-right"></i></span>
             </a>
-            <a href="{{ route('lapor-tanam') }}" class="card" style="text-decoration:none; display:block; text-align:center; border-color:var(--primary);">
+            <a href="{{ route('lapor-tanam') }}" class="card" style="text-align:center; border-color:var(--primary);">
                 <div style="font-size:2.5rem; margin-bottom:10px;">✍️</div>
-                <h3 style="color:var(--primary)">Lapor Tanam</h3>
+                <h3>Lapor Tanam</h3>
                 <p class="bio">Input data tanam langsung memperbarui grafik distribusi desa. Petani aktif dapat prioritas armada truk.</p>
                 <span class="btn btn-primary" style="margin-top:8px; display:inline-block; font-size:.85rem;">Lapor Sekarang</span>
             </a>

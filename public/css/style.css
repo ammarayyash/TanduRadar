@@ -3,8 +3,8 @@
     --primary-hover: #15803d;
     --bg-dark: #0f172a;
     --bg-card: #1e293b;
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
+    --text-main: #ffffff;
+    --text-muted: #cbd5e1;
     --border: #334155;
     /* Status warna TanamBijak */
     --status-merah:  #ef4444;
@@ -19,7 +19,7 @@
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
     background-color: var(--bg-dark);
     color: var(--text-main);
     line-height: 1.6;
@@ -182,6 +182,22 @@ body {
     border-radius: 12px;
     padding: 24px;
     transition: transform 0.3s, border-color 0.3s;
+    color: var(--text-muted);
+    text-decoration: none;
+}
+
+a.card {
+    display: block;
+    color: var(--text-muted);
+}
+
+a.card p {
+    color: var(--text-muted);
+}
+
+a.card h3 {
+    color: var(--text-main);
+    margin-bottom: 10px;
 }
 
 .card:hover {
@@ -209,7 +225,7 @@ body {
     font-weight: 600;
 }
 
-.card-member .bio {
+.card-member .bio, .card .bio {
     color: var(--text-muted);
     font-size: 0.88rem;
     margin: 12px 0;
