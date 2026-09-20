@@ -52,4 +52,8 @@ $app->singleton(
 |
 */
 
+if (isset($_ENV['IS_VERCEL']) && $_ENV['IS_VERCEL'] == 'true') {
+    $app->useStoragePath('/tmp/storage');
+}
+
 return $app;

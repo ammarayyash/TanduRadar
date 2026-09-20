@@ -36,6 +36,7 @@
         "APP_NAME": "TanduRadar",
         "APP_ENV": "production",
         "APP_DEBUG": "true",
+        "IS_VERCEL": "true",
         "APP_KEY": "base64:tfupSphthEQcB4Kc6kQvrR7jH/ltCuWcC7FcDqRoI5A=",
         "LOG_CHANNEL": "stderr",
         "VIEW_COMPILED_PATH": "/tmp",
