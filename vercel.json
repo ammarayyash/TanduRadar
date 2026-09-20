@@ -33,8 +33,12 @@
         }
     ],
     "env": {
+        "APP_NAME": "TanduRadar",
         "APP_ENV": "production",
         "APP_DEBUG": "false",
+        "APP_KEY": "base64:tfupSphthEQcB4Kc6kQvrR7jH/ltCuWcC7FcDqRoI5A=",
+        "LOG_CHANNEL": "stderr",
+        "VIEW_COMPILED_PATH": "/tmp",
         "CACHE_DRIVER": "array",
         "SESSION_DRIVER": "cookie",
         "QUEUE_CONNECTION": "sync"
