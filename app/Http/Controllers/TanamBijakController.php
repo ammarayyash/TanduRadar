@@ -30,8 +30,8 @@ class TanamBijakController extends Controller
     {
         $kecamatan = $request->get('kecamatan', $this->defaultKecamatan);
 
-        // Total luas lahan aktif di kecamatan ini
-        $totalLuas = LahanActivity::where('kecamatan', $kecamatan)
+        // Hitung total luas semua komoditas di kecamatan tersebut
+        $totalLuas = (float) LahanActivity::where('kecamatan', $kecamatan)
             ->where('status', 'aktif')
             ->sum('luas_lahan');
 
@@ -41,9 +41,9 @@ class TanamBijakController extends Controller
             ->select('komoditas', DB::raw('SUM(luas_lahan) as total_luas'), DB::raw('COUNT(*) as jumlah_petani'))
             ->groupBy('komoditas')
             ->get()
-            ->map(function ($item) use ($totalLuas) {
-                $persen     = $totalLuas > 0 ? round(($item->total_luas / $totalLuas) * 100, 1) : 0;
-                $kuota      = KuotaRegional::getKuota(request('kecamatan', 'Kecamatan Sukamaju'), $item->komoditas);
+            ->map(function ($item) use ($kecamatan, $totalLuas) {
+                $kuota      = (float) KuotaRegional::getKuota($kecamatan, $item->komoditas);
+                $persen     = $totalLuas > 0 ? round(((float)$item->total_luas / $totalLuas) * 100, 1) : 0;
                 $rasio      = $kuota > 0 ? ($persen / $kuota) : 0;
                 $item->persen        = $persen;
                 $item->kuota_max     = $kuota;
@@ -68,7 +68,7 @@ class TanamBijakController extends Controller
         $kecamatan = $request->get('kecamatan', $this->defaultKecamatan);
 
         // Komoditas berstatus merah (berbahaya)
-        $totalLuas = LahanActivity::where('kecamatan', $kecamatan)
+        $totalLuas = (float) LahanActivity::where('kecamatan', $kecamatan)
             ->where('status', 'aktif')->sum('luas_lahan');
 
         $komoditasMerah = LahanActivity::where('kecamatan', $kecamatan)
@@ -77,8 +77,8 @@ class TanamBijakController extends Controller
             ->groupBy('komoditas')
             ->get()
             ->filter(function ($item) use ($totalLuas, $kecamatan) {
-                $persen = $totalLuas > 0 ? ($item->total_luas / $totalLuas) * 100 : 0;
-                $kuota  = KuotaRegional::getKuota($kecamatan, $item->komoditas);
+                $persen = $totalLuas > 0 ? ((float)$item->total_luas / $totalLuas) * 100 : 0;
+                $kuota  = (float) KuotaRegional::getKuota($kecamatan, $item->komoditas);
                 return $persen >= $kuota;
             })
             ->pluck('komoditas');
@@ -90,8 +90,8 @@ class TanamBijakController extends Controller
             ->groupBy('komoditas')
             ->get()
             ->filter(function ($item) use ($totalLuas, $kecamatan) {
-                $persen = $totalLuas > 0 ? ($item->total_luas / $totalLuas) * 100 : 0;
-                $kuota  = KuotaRegional::getKuota($kecamatan, $item->komoditas);
+                $persen = $totalLuas > 0 ? ((float)$item->total_luas / $totalLuas) * 100 : 0;
+                $kuota  = (float) KuotaRegional::getKuota($kecamatan, $item->komoditas);
                 return $persen < ($kuota * 0.6);
             })
             ->pluck('komoditas');
@@ -127,7 +127,7 @@ class TanamBijakController extends Controller
             ->get();
 
         // Estimasi tonase yang terselamatkan (vs skenario tanpa rotasi)
-        $totalTonase = LahanActivity::where('kecamatan', $kecamatan)
+        $totalTonase = (float) LahanActivity::where('kecamatan', $kecamatan)
             ->where('status', 'aktif')
             ->sum('estimasi_tonase');
 
