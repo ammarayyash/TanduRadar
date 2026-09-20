@@ -47,6 +47,7 @@
         "APP_EVENTS_CACHE": "/tmp/events.php",
         "CACHE_DRIVER": "array",
         "SESSION_DRIVER": "cookie",
+        "SESSION_LIFETIME": "120",
         "QUEUE_CONNECTION": "sync"
     }
 }
