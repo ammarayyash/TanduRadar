@@ -4,6 +4,8 @@
 <!-- Hero Section -->
 <section id="home" class="hero">
     <div class="container hero-content">
+        <img src="{{ asset('images/logo.png') }}" alt="{{ $group_name }} Logo" style="width: 200px; max-width: 80%; height: auto; margin-bottom: 20px;">
+        <br>
         <span class="tag">Portofolio Resmi</span>
         <h1>{{ $hero_title }} oleh <span>{{ $group_name }}</span></h1>
         <p>{{ $hero_subtitle }}</p>
