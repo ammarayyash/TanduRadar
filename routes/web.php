@@ -25,3 +25,11 @@ Route::get('/logistik', [TanamBijakController::class, 'logistik'])->name('logist
 // ─── TanamBijak: Lapor Tanam ──────────────────────────────────────────────
 Route::get('/lapor-tanam',  [TanamBijakController::class, 'laporTanam'])->name('lapor-tanam');
 Route::post('/lapor-tanam', [TanamBijakController::class, 'storeLaporTanam'])->name('lapor-tanam.store');
+
+Route::get('/migrate', function () {
+    \Illuminate\Support\Facades\Artisan::call('migrate:fresh', [
+        '--force' => true,
+        '--seed' => true
+    ]);
+    return 'Database migrated and seeded successfully! <a href="/">Kembali ke Beranda</a>';
+});
