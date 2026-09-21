@@ -51,7 +51,7 @@
 
     <script>
     (function() {
-        // Daftar wallpaper
+        // Semua wallpaper
         var wallpapers = [
             '{{ asset("images/wallpapers/amany-firdaus-Vhs3BXQcBeI-unsplash.jpg") }}',
             '{{ asset("images/wallpapers/john-roy-CrVGV4m0H3A-unsplash.jpg") }}',
@@ -62,73 +62,99 @@
             '{{ asset("images/wallpapers/turnando-alzaman-2JcFGglOf-0-unsplash.jpg") }}',
         ];
 
-        // Pilih wallpaper berdasarkan halaman
-        var pageKey = window.location.pathname;
-        var pageMap = {
-            '/':             0,
-            '/mata-desa':    1,
-            '/rekomendasi':  2,
-            '/logistik':     3,
-            '/lapor-tanam':  4,
-        };
-        var idx = (pageMap[pageKey] !== undefined) ? pageMap[pageKey] : (Math.abs(pageKey.split('').reduce(function(a,c){return a+c.charCodeAt(0);},0)) % wallpapers.length);
-        var bg = document.getElementById('parallax-bg');
+        // Beranda = wallpaper ke-0 (tetap), halaman lain = acak dari semua 7
+        var isHome = (window.location.pathname === '/' || window.location.pathname === '');
+        var idx;
+        if (isHome) {
+            idx = 0;
+        } else {
+            // Cek sessionStorage supaya tiap page visit beda tapi tidak berubah saat refresh
+            var storageKey = 'wp_' + window.location.pathname;
+            var saved = sessionStorage.getItem(storageKey);
+            if (saved !== null) {
+                idx = parseInt(saved);
+            } else {
+                idx = Math.floor(Math.random() * wallpapers.length);
+                sessionStorage.setItem(storageKey, idx);
+            }
+        }
 
-        // Buat dua layer untuk efek fade in/out saat navigasi
+        var bg     = document.getElementById('parallax-bg');
         var layerA = document.createElement('div');
         var layerB = document.createElement('div');
         layerA.className = layerB.className = 'parallax-layer';
         bg.appendChild(layerA);
         bg.appendChild(layerB);
 
-        // Set gambar
         layerA.style.backgroundImage = 'url(' + wallpapers[idx] + ')';
         layerA.style.opacity = '1';
-        layerB.style.opacity = '0';
+        layerB.style.opacity  = '0';
 
-        // Preload gambar berikutnya diam-diam
-        var nextIdx = (idx + 1) % wallpapers.length;
-        var preload = new Image();
-        preload.src = wallpapers[nextIdx];
+        // Preload gambar lain
+        wallpapers.forEach(function(src, i) {
+            if (i !== idx) { var img = new Image(); img.src = src; }
+        });
 
-        // Parallax scroll — image bergerak 1/3 kecepatan scroll
+        // ── Parallax scroll ──────────────────────────────────────────
+        // Gambar bergerak NAIK (translateY negatif) saat scroll turun,
+        // dengan kecepatan 1/3 scroll. Dibatasi agar tidak keluar frame.
+        var SPEED = 0.33;   // gambar bergerak 1/3 scroll user
+
         var ticking = false;
-        function onScroll() {
-            if (!ticking) {
-                requestAnimationFrame(function() {
-                    var offset = window.pageYOffset;
-                    var translateY = offset * 0.33;
-                    layerA.style.transform = 'translateY(' + translateY + 'px)';
-                    layerB.style.transform = 'translateY(' + translateY + 'px)';
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        }
-        window.addEventListener('scroll', onScroll, { passive: true });
+        function applyParallax() {
+            var scrollTop  = window.pageYOffset;
+            var maxScroll  = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+            // Buffer yang tersedia = 30% viewport height (dari inset: -30%)
+            var maxTravel  = window.innerHeight * 0.30;
+            // Negatif = image naik saat scroll turun → efek parallax benar
+            var raw        = -(scrollTop * SPEED);
+            // Clamp agar image tidak keluar batas atas/bawah
+            var clamped    = Math.max(-maxTravel, Math.min(0, raw));
 
-        // Fade out saat klik link halaman lain
+            layerA.style.transform = 'translateY(calc(-30% + ' + clamped + 'px))';
+            layerB.style.transform = 'translateY(calc(-30% + ' + clamped + 'px))';
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', function() {
+            if (!ticking) { requestAnimationFrame(applyParallax); ticking = true; }
+        }, { passive: true });
+
+        // Inisialisasi posisi awal
+        applyParallax();
+
+        // ── Fade out → navigasi → fade in ────────────────────────────
         document.querySelectorAll('a').forEach(function(link) {
             var href = link.getAttribute('href');
-            if (!href || href.startsWith('#') || href.startsWith('mailto') || href.startsWith('http') && !href.includes(window.location.hostname)) return;
+            if (!href || href.startsWith('#') || href.startsWith('javascript') || href.startsWith('mailto')) return;
+            // Lewati link eksternal
+            try {
+                var url = new URL(href, window.location.href);
+                if (url.hostname !== window.location.hostname) return;
+            } catch(e) { return; }
+
             link.addEventListener('click', function(e) {
                 var target = link.getAttribute('href');
-                // Hanya intercept internal links
-                if (target && !target.startsWith('#') && !target.startsWith('javascript')) {
+                if (target && !target.startsWith('#')) {
                     e.preventDefault();
-                    bg.style.transition = 'opacity 0.5s ease';
-                    bg.style.opacity = '0';
-                    setTimeout(function() {
-                        window.location.href = target;
-                    }, 450);
+                    bg.style.transition = 'opacity 0.45s ease';
+                    bg.style.opacity    = '0';
+                    document.body.style.transition = 'opacity 0.45s ease';
+                    document.body.style.opacity    = '0';
+                    setTimeout(function() { window.location.href = target; }, 430);
                 }
             });
         });
 
-        // Fade in saat halaman load
-        bg.style.opacity = '0';
+        // Fade in saat halaman dimuat
+        bg.style.opacity   = '0';
         bg.style.transition = 'opacity 0.7s ease';
-        setTimeout(function() { bg.style.opacity = '1'; }, 50);
+        document.body.style.opacity   = '0';
+        document.body.style.transition = 'opacity 0.7s ease';
+        setTimeout(function() {
+            bg.style.opacity   = '1';
+            document.body.style.opacity = '1';
+        }, 60);
     })();
     </script>
 
