@@ -128,23 +128,33 @@
         // ── Fade out → navigasi → fade in ────────────────────────────
         document.querySelectorAll('a').forEach(function(link) {
             var href = link.getAttribute('href');
-            if (!href || href.startsWith('#') || href.startsWith('javascript') || href.startsWith('mailto')) return;
-            // Lewati link eksternal
+            if (!href || href.startsWith('javascript') || href.startsWith('mailto')) return;
+            
             try {
-                var url = new URL(href, window.location.href);
+                var url = new URL(link.href); // Gunakan link.href yang sudah absolute
+                // Lewati link eksternal
                 if (url.hostname !== window.location.hostname) return;
+                
+                // Jika link menuju halaman yang sama (misal /#about dari /)
+                if (url.pathname === window.location.pathname && url.hash) {
+                    return; // Biarkan browser melakukan smooth scroll
+                }
+                // Jika halaman sama tanpa hash (contoh klik home saat di home)
+                if (url.pathname === window.location.pathname && !url.hash && href !== '/') {
+                     return;
+                }
             } catch(e) { return; }
 
             link.addEventListener('click', function(e) {
-                var target = link.getAttribute('href');
-                if (target && !target.startsWith('#')) {
-                    e.preventDefault();
-                    bg.style.transition = 'opacity 0.45s ease';
-                    bg.style.opacity    = '0';
-                    document.body.style.transition = 'opacity 0.45s ease';
-                    document.body.style.opacity    = '0';
-                    setTimeout(function() { window.location.href = target; }, 430);
-                }
+                // Jangan intercept jika buka tab baru (Ctrl+Click / target="_blank")
+                if (e.ctrlKey || e.metaKey || link.target === '_blank') return;
+
+                e.preventDefault();
+                bg.style.transition = 'opacity 0.45s ease';
+                bg.style.opacity    = '0';
+                document.body.style.transition = 'opacity 0.45s ease';
+                document.body.style.opacity    = '0';
+                setTimeout(function() { window.location.href = link.href; }, 430);
             });
         });
 
