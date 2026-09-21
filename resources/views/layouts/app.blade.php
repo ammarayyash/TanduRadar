@@ -96,23 +96,25 @@
         });
 
         // ── Parallax scroll ──────────────────────────────────────────
-        // Gambar bergerak NAIK (translateY negatif) saat scroll turun,
-        // dengan kecepatan 1/3 scroll. Dibatasi agar tidak keluar frame.
-        var SPEED = 0.33;   // gambar bergerak 1/3 scroll user
+        // Menggunakan background-position-y sehingga gambar TIDAK pernah terpotong.
+        // Saat scroll=0 → posisi 50% (tengah gambar terlihat)
+        // Saat scroll turun → posisi bergerak ke atas (angka kecil = lebih ke atas)
+        // Kecepatan: setiap scroll 3px → posisi berubah ~1 unit
+
+        var SPEED = 0.015; // semakin kecil = semakin lambat parallax
 
         var ticking = false;
         function applyParallax() {
-            var scrollTop  = window.pageYOffset;
-            var maxScroll  = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-            // Buffer yang tersedia = 30% viewport height (dari inset: -30%)
-            var maxTravel  = window.innerHeight * 0.30;
-            // Negatif = image naik saat scroll turun → efek parallax benar
-            var raw        = -(scrollTop * SPEED);
-            // Clamp agar image tidak keluar batas atas/bawah
-            var clamped    = Math.max(-maxTravel, Math.min(0, raw));
+            var scrollTop = window.pageYOffset;
+            var maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+            // progress: 0 (atas) → 1 (bawah)
+            var progress = scrollTop / maxScroll;
+            // posY: 50% saat di atas, turun ke 30% saat scroll habis (gambar naik perlahan)
+            var posY = 50 - (progress * 25);  // range: 50% → 25%
+            var posYpx = Math.round(posY * 10) / 10;
 
-            layerA.style.transform = 'translateY(calc(-30% + ' + clamped + 'px))';
-            layerB.style.transform = 'translateY(calc(-30% + ' + clamped + 'px))';
+            layerA.style.backgroundPosition = 'center ' + posYpx + '%';
+            layerB.style.backgroundPosition = 'center ' + posYpx + '%';
             ticking = false;
         }
 
