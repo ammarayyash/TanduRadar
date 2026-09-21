@@ -35,25 +35,25 @@
         </div>
         <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap:20px; margin-bottom:30px;">
             <a href="{{ route('mata-desa') }}" class="card" style="text-align:center;">
-                <div style="font-size:2.5rem; margin-bottom:10px;">📊</div>
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" alt="Mata Desa" style="width: 100%; height: 160px; object-fit: cover; border-radius: 8px; margin-bottom: 15px;">
                 <h3>Mata Desa</h3>
                 <p class="bio">Visualisasi distribusi komoditas real-time per kecamatan dengan indikator Merah/Kuning/Hijau.</p>
                 <span class="project-link">Buka Modul <i class="fas fa-arrow-right"></i></span>
             </a>
             <a href="{{ route('rekomendasi') }}" class="card" style="text-align:center;">
-                <div style="font-size:2.5rem; margin-bottom:10px;">💡</div>
+                <img src="https://images.unsplash.com/photo-1628183213364-e69c1184ff10?w=600&q=80" alt="Rekomendasi Cerdas" style="width: 100%; height: 160px; object-fit: cover; border-radius: 8px; margin-bottom: 15px;">
                 <h3>Rekomendasi Cerdas</h3>
                 <p class="bio">Saran komoditas alternatif saat lahan jenuh, lengkap dengan kalkulator estimasi keuntungan.</p>
                 <span class="project-link">Buka Modul <i class="fas fa-arrow-right"></i></span>
             </a>
             <a href="{{ route('logistik') }}" class="card" style="text-align:center;">
-                <div style="font-size:2.5rem; margin-bottom:10px;">🚛</div>
+                <img src="https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=600&q=80" alt="Eco-Logistik" style="width: 100%; height: 160px; object-fit: cover; border-radius: 8px; margin-bottom: 15px;">
                 <h3>Eco-Logistik</h3>
                 <p class="bio">Jadwal panen desa & koordinasi armada truk. Tracker sayur terselamatkan dari food waste.</p>
                 <span class="project-link">Buka Modul <i class="fas fa-arrow-right"></i></span>
             </a>
             <a href="{{ route('lapor-tanam') }}" class="card" style="text-align:center; border-color:var(--primary);">
-                <div style="font-size:2.5rem; margin-bottom:10px;">✍️</div>
+                <img src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?w=600&q=80" alt="Lapor Tanam" style="width: 100%; height: 160px; object-fit: cover; border-radius: 8px; margin-bottom: 15px;">
                 <h3>Lapor Tanam</h3>
                 <p class="bio">Input data tanam langsung memperbarui grafik distribusi desa. Petani aktif dapat prioritas armada truk.</p>
                 <span class="btn btn-primary" style="margin-top:8px; display:inline-block; font-size:.85rem;">Lapor Sekarang</span>
