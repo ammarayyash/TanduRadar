@@ -4,14 +4,13 @@
 <!-- Hero Section -->
 <section id="home" class="hero">
     <div class="container hero-content">
-        <img src="{{ asset('images/logo.png') }}" alt="{{ $group_name }} Logo" style="width: 200px; max-width: 80%; height: auto; margin-bottom: 20px;">
-        <br>
-        <span class="tag">Portofolio Resmi</span>
+        <img src="{{ asset('images/logo.png') }}" alt="{{ $group_name }} Logo" style="width: 180px; max-width: 80%; height: auto; margin-bottom: 24px; filter: drop-shadow(0 0 30px rgba(34,197,94,0.4));">
+        <span class="tag">🌾 Portofolio Resmi &nbsp;·&nbsp; Kelompok 10</span>
         <h1>{{ $hero_title }} oleh <span>{{ $group_name }}</span></h1>
         <p>{{ $hero_subtitle }}</p>
         <div class="hero-buttons">
-            <a href="#projects" class="btn btn-primary">Lihat Proyek</a>
-            <a href="#team" class="btn btn-secondary">Tim Kami</a>
+            <a href="#projects" class="btn btn-primary"><i class="fas fa-rocket"></i> Lihat Proyek</a>
+            <a href="#team" class="btn btn-secondary"><i class="fas fa-users"></i> Tim Kami</a>
         </div>
     </div>
 </section>
@@ -21,7 +20,22 @@
     <div class="container">
         <div class="section-header">
             <h2>Tentang Kelompok</h2>
-            <p>Kami berkolaborasi untuk menciptakan karya web yang fungsional, responsif, dan berdampak positif.</p>
+            <div class="divider-line"></div>
+            <p style="margin-top:16px;">Kami berkolaborasi untuk menciptakan solusi teknologi pertanian yang berdampak nyata bagi masyarakat desa.</p>
+        </div>
+        <div class="about-stats">
+            <div style="text-align:center;">
+                <span class="about-stat-num">4</span>
+                <span class="about-stat-label">Modul Sistem</span>
+            </div>
+            <div style="text-align:center;">
+                <span class="about-stat-num">2</span>
+                <span class="about-stat-label">Anggota Tim</span>
+            </div>
+            <div style="text-align:center;">
+                <span class="about-stat-num">∞</span>
+                <span class="about-stat-label">Dampak Petani</span>
+            </div>
         </div>
     </div>
 </section>
