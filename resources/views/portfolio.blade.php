@@ -4,7 +4,7 @@
 <!-- Hero Section -->
 <section id="home" class="hero">
     <div class="container hero-content">
-        <img src="{{ asset('images/logo.png') }}" alt="{{ $group_name }} Logo" style="width: 180px; max-width: 80%; height: auto; margin-bottom: 24px; filter: drop-shadow(0 0 30px rgba(34,197,94,0.4));">
+        <img src="{{ asset('images/logo.png') }}" alt="{{ $group_name }} Logo" style="width: 220px; max-width: 80%; height: auto; display: block; margin: 0 auto 24px; image-rendering: crisp-edges;">
         <span class="tag">🌾 Portofolio Resmi &nbsp;·&nbsp; Kelompok 10</span>
         <h1>{{ $hero_title }} oleh <span>{{ $group_name }}</span></h1>
         <p>{{ $hero_subtitle }}</p>
