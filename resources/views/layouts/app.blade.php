@@ -14,7 +14,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body data-wallpaper="{{ $wallpaper ?? '' }}">
+
+    <!-- Parallax Background -->
+    <div id="parallax-bg" aria-hidden="true"></div>
 
     <header class="navbar">
         <div class="container nav-container">
@@ -46,6 +49,88 @@
         </div>
     </footer>
 
-</body>
+    <script>
+    (function() {
+        // Daftar wallpaper
+        var wallpapers = [
+            '{{ asset("images/wallpapers/amany-firdaus-Vhs3BXQcBeI-unsplash.jpg") }}',
+            '{{ asset("images/wallpapers/john-roy-CrVGV4m0H3A-unsplash.jpg") }}',
+            '{{ asset("images/wallpapers/muhammad-haikal-sjukri-npQ71wfg5pQ-unsplash.jpg") }}',
+            '{{ asset("images/wallpapers/navi-pIAketNRHrQ-unsplash.jpg") }}',
+            '{{ asset("images/wallpapers/sathsara-priyankara-YqMA-ALTa-E-unsplash.jpg") }}',
+            '{{ asset("images/wallpapers/suneth-nawoda-de-silva-obiV2y8iFzE-unsplash.jpg") }}',
+            '{{ asset("images/wallpapers/turnando-alzaman-2JcFGglOf-0-unsplash.jpg") }}',
+        ];
 
+        // Pilih wallpaper berdasarkan halaman
+        var pageKey = window.location.pathname;
+        var pageMap = {
+            '/':             0,
+            '/mata-desa':    1,
+            '/rekomendasi':  2,
+            '/logistik':     3,
+            '/lapor-tanam':  4,
+        };
+        var idx = (pageMap[pageKey] !== undefined) ? pageMap[pageKey] : (Math.abs(pageKey.split('').reduce(function(a,c){return a+c.charCodeAt(0);},0)) % wallpapers.length);
+        var bg = document.getElementById('parallax-bg');
+
+        // Buat dua layer untuk efek fade in/out saat navigasi
+        var layerA = document.createElement('div');
+        var layerB = document.createElement('div');
+        layerA.className = layerB.className = 'parallax-layer';
+        bg.appendChild(layerA);
+        bg.appendChild(layerB);
+
+        // Set gambar
+        layerA.style.backgroundImage = 'url(' + wallpapers[idx] + ')';
+        layerA.style.opacity = '1';
+        layerB.style.opacity = '0';
+
+        // Preload gambar berikutnya diam-diam
+        var nextIdx = (idx + 1) % wallpapers.length;
+        var preload = new Image();
+        preload.src = wallpapers[nextIdx];
+
+        // Parallax scroll — image bergerak 1/3 kecepatan scroll
+        var ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                requestAnimationFrame(function() {
+                    var offset = window.pageYOffset;
+                    var translateY = offset * 0.33;
+                    layerA.style.transform = 'translateY(' + translateY + 'px)';
+                    layerB.style.transform = 'translateY(' + translateY + 'px)';
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        // Fade out saat klik link halaman lain
+        document.querySelectorAll('a').forEach(function(link) {
+            var href = link.getAttribute('href');
+            if (!href || href.startsWith('#') || href.startsWith('mailto') || href.startsWith('http') && !href.includes(window.location.hostname)) return;
+            link.addEventListener('click', function(e) {
+                var target = link.getAttribute('href');
+                // Hanya intercept internal links
+                if (target && !target.startsWith('#') && !target.startsWith('javascript')) {
+                    e.preventDefault();
+                    bg.style.transition = 'opacity 0.5s ease';
+                    bg.style.opacity = '0';
+                    setTimeout(function() {
+                        window.location.href = target;
+                    }, 450);
+                }
+            });
+        });
+
+        // Fade in saat halaman load
+        bg.style.opacity = '0';
+        bg.style.transition = 'opacity 0.7s ease';
+        setTimeout(function() { bg.style.opacity = '1'; }, 50);
+    })();
+    </script>
+
+</body>
 </html>

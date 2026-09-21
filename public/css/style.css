@@ -50,7 +50,7 @@ html { scroll-behavior: smooth; }
 
 body {
     font-family: 'Lato', 'Righteous', sans-serif;
-    background-color: var(--bg);
+    background-color: transparent;
     color: var(--text-main);
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
@@ -63,6 +63,35 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+/* ─────────────────────────────── Parallax Background ── */
+#parallax-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.parallax-layer {
+    position: absolute;
+    inset: -30%;       /* Extra space so parallax doesn't show gaps */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    will-change: transform;
+    transition: opacity 0.7s ease;
+}
+
+/* White semi-transparent overlay so content stays readable */
+#parallax-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.72);
+    z-index: 1;
+    pointer-events: none;
+}
 
 /* ─────────────────────────────── Navbar ── */
 .navbar {
@@ -107,7 +136,7 @@ h1, h2, h3, h4, h5, h6 {
 /* ─────────────────────────────── Sections ── */
 .section { padding: 100px 0 70px; }
 
-.section:nth-child(even) { background: var(--bg-section); }
+.section:nth-child(even) { background: rgba(240, 250, 244, 0.5); }
 
 .section-header { text-align: center; margin-bottom: 56px; }
 
@@ -131,8 +160,8 @@ h1, h2, h3, h4, h5, h6 {
     min-height: 100vh;
     display: flex; align-items: center; text-align: center;
     padding-top: 70px;
-    background: var(--gradient-hero);
-    position: relative; overflow: hidden;
+    background: transparent;
+    position: relative;
 }
 
 .hero-content { position: relative; z-index: 1; }
